@@ -17,7 +17,7 @@
     </appender>
     
     <logger name="log" additivity="false">
-        <level value="warn" />
+        <level value="info" />
         <appender-ref ref="LOG" />
     </logger>
     
