@@ -3,6 +3,7 @@ package com.domain.util;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 public class StringUtil {
 
@@ -4330,5 +4331,18 @@ public class StringUtil {
             code = intCode + "";
         }
         return String.format("%02d", Integer.parseInt(code));
+    }
+
+    /**
+     * 产生一个随机的字符串
+     */
+    public static String randomString(int length) {
+        String str = "abcdefghijklmnopqrstuvwxyz";
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < length; i++) {
+            int number = new Random().nextInt(26);
+            buf.append(str.charAt(number));
+        }
+        return buf.toString().toLowerCase();
     }
 }

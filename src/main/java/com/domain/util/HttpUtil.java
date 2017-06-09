@@ -50,7 +50,6 @@ public class HttpUtil {
 			}
 
 			httpPost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
-			long cunrrentTime = System.currentTimeMillis();
 			response = httpclient.execute(httpPost);
 
 			HttpEntity entity = response.getEntity();
@@ -65,7 +64,9 @@ public class HttpUtil {
 			e.printStackTrace();
 		} finally {
 			try {
-				response.close();
+				if (response != null){
+					response.close();
+				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -98,7 +99,9 @@ public class HttpUtil {
         }
 	    finally {
 	        try {
-                response.close();
+	        	if (response != null){
+					response.close();
+				}
             } catch (IOException e) {
 	        	e.printStackTrace();
             }
