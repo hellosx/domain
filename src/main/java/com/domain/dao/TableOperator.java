@@ -3,6 +3,8 @@ package com.domain.dao;
 /**
  * Created by sunxin(hysx8@sina.com) on 2017/6/9.
  */
+import org.apache.log4j.Logger;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,6 +14,9 @@ import javax.sql.DataSource;
 
 public class TableOperator {
     private DataSource dataSource;
+
+    private static Logger logger = Logger.getLogger("log");
+
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
     }
@@ -92,5 +97,50 @@ public class TableOperator {
         stmt.close();
 
         conn.close();
+    }
+
+    /**
+     * 同步到DB
+     */
+    public void insertDomain(String domain){
+        String[] array = domain.split(",");
+
+        StringBuffer ddl = new StringBuffer();
+        ddl.append("INSERT INTO domain (");
+        for (int i = 0; i < COUNT; ++i) {
+            if (i != 0) {
+                ddl.append(", ");
+            }
+            ddl.append("F" + i);
+        }
+        ddl.append(") VALUES (");
+        for (int i = 0; i < COUNT; ++i) {
+            if (i != 0) {
+                ddl.append(", ");
+            }
+            ddl.append("?");
+        }
+        ddl.append(")");
+
+        try {
+            Connection conn = dataSource.getConnection();
+
+            PreparedStatement stmt = conn.prepareStatement(ddl.toString());
+
+            for (int i = 0; i < COUNT; ++i) {
+                stmt.setInt(i + 1, i);
+            }
+            stmt.execute();
+            stmt.close();
+
+            conn.close();
+
+        }
+        catch (Throwable e){
+            e.printStackTrace();
+            logger.warn(e.getMessage(), e);
+        }
+
+
     }
 }
