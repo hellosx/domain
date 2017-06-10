@@ -7,7 +7,7 @@
 
     <appender name="LOG"
         class="org.apache.log4j.RollingFileAppender">
-        <param name="file" value="C:\domainLogs/log.log" />
+        <param name="file" value="C:\\domainLogs/log.log" />
         <param name="append" value="true" />
         <param name="encoding" value="UTF-8" />
         <param name="threshold" value="info" />
