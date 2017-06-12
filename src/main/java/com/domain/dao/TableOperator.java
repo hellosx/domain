@@ -3,14 +3,12 @@ package com.domain.dao;
 /**
  * Created by sunxin(hysx8@sina.com) on 2017/6/9.
  */
+
 import org.apache.log4j.Logger;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-
 import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.Statement;
 
 public class TableOperator {
     private DataSource dataSource;
@@ -26,21 +24,33 @@ public class TableOperator {
      */
     public void insertDomain(String domain){
         String sql = createDomainSql(domain);
+        Statement stmt = null;
+        Connection conn = null;
         try {
-            Connection conn = dataSource.getConnection();
-            Statement stmt = conn.createStatement();
+            conn = dataSource.getConnection();
+            stmt = conn.createStatement();
             stmt.execute(sql);
-            stmt.close();
-            conn.close();
+
         }
         catch (Throwable e){
             e.printStackTrace();
             logger.warn(e.getMessage(), e);
         }
+        finally {
+            try {
+                if (conn != null &&stmt != null){
+                    stmt.close();
+                    conn.close();
+                }
+            }
+            catch (Throwable e){
+                logger.error(e.getMessage(), e);
+            }
+        }
     }
 
 
-    public static String createDomainSql(String domain) {
+    private static String createDomainSql(String domain) {
         String[] array = domain.split(",");
         StringBuilder sql = new StringBuilder("INSERT INTO domain (domain_name, domain_length, CREATE_time) VALUES ");
         for (int i = 0; i < array.length; i++) {

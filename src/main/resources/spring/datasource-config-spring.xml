@@ -40,36 +40,6 @@
         <property name="filters" value="stat,config"/>
     </bean>
 
-
-    <!--<bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource"-->
-          <!--destroy-method="close">-->
-        <!--<property name="url" value="${url}" />-->
-        <!--<property name="username" value="${username}" />-->
-        <!--<property name="password" value="${password}" />-->
-        <!--<property name="driverClassName" value="${driverClassName}" />-->
-        <!--<property name="filters" value="${filters}" />-->
-
-        <!--<property name="maxActive" value="${maxActive}" />-->
-        <!--<property name="initialSize" value="${initialSize}" />-->
-        <!--<property name="maxWait" value="${maxWait}" />-->
-        <!--<property name="minIdle" value="${minIdle}" />-->
-
-        <!--<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />-->
-        <!--<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />-->
-
-        <!--<property name="validationQuery" value="${validationQuery}" />-->
-        <!--<property name="testWhileIdle" value="${testWhileIdle}" />-->
-        <!--<property name="testOnBorrow" value="${testOnBorrow}" />-->
-        <!--<property name="testOnReturn" value="${testOnReturn}" />-->
-        <!--<property name="maxOpenPreparedStatements"-->
-                  <!--value="${maxOpenPreparedStatements}" />-->
-        <!--<property name="removeAbandoned" value="${removeAbandoned}" /> &lt;!&ndash; 打开removeAbandoned功能 &ndash;&gt;-->
-        <!--<property name="removeAbandonedTimeout" value="${removeAbandonedTimeout}" /> &lt;!&ndash; 1800秒，也就是30分钟 &ndash;&gt;-->
-        <!--<property name="logAbandoned" value="${logAbandoned}" /> &lt;!&ndash; 关闭abanded连接时输出错误日志 &ndash;&gt;-->
-    <!--</bean>-->
-
-
-
     <bean id="jdbc" class="org.springframework.jdbc.core.JdbcTemplate">
         <property name="dataSource">
             <ref bean="dataSource" />
