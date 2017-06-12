@@ -27,7 +27,13 @@ public class PropertyHolder extends PropertyPlaceholderConfigurer {
     }
 
     public static String getProperty(String name) {
-        return propertiesMap.get(name);
+
+        if(propertiesMap.containsKey(name)) {
+
+            return propertiesMap.get(name);
+        }
+
+        return "";
     }
 
 }

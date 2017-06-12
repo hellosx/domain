@@ -9,13 +9,12 @@
 		<property name="locations">
 			<list>
 				<value>classpath:db.properties</value>
+				<value>classpath:common.properties</value>
 			</list>
 		</property>
 	</bean>
 
 	<import resource="classpath:/spring/datasource-config-spring.xml"/>
-
-	<!--<import resource="classpath:/spring/redis-spring.xml"/>-->
 
 	<bean id="springTableOperatorBean" class="com.domain.dao.TableOperator"
 		  scope="prototype">
