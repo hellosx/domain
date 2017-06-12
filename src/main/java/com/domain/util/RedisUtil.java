@@ -7,7 +7,6 @@ import redis.clients.jedis.Jedis;
  */
 public class RedisUtil {
 
-
     private static Jedis jedis;
 
     public void setJedis(Jedis jedis) {
