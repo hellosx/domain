@@ -20,6 +20,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HttpUtil {
 
@@ -108,5 +110,53 @@ public class HttpUtil {
 	    }
 	    return sb.toString();
 	}
+
+	public static String get(String url, String charSet){
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		HttpGet httpGet = new HttpGet(url);
+		CloseableHttpResponse response = null;
+		StringBuffer sb = new StringBuffer();
+		try {
+			long cunrrentTime = System.currentTimeMillis();
+			response = httpclient.execute(httpGet);
+			HttpEntity entity = response.getEntity();
+
+			InputStream is = entity.getContent();
+			BufferedReader br = new BufferedReader(new InputStreamReader(is, charSet));
+			String str = "";
+			while ((str = br.readLine()) != null) {
+				sb.append(str);
+			}
+			EntityUtils.consume(entity);
+		}
+		catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if (response != null){
+					response.close();
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return sb.toString();
+	}
+
+	public static String extractMessageByRegular(String msg) {
+
+		List<String> list = new ArrayList<String>();
+		Pattern p = Pattern.compile("(\\[[^\\]]*\\])");
+		Matcher m = p.matcher(msg);
+		while (m.find()) {
+			String str = m.group();
+			list.add(str.substring(1, m.group().length() - 1));
+		}
+		return list.get(0);
+	}
+
 
 }
