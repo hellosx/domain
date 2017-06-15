@@ -5,6 +5,7 @@ package com.domain.dao;
  */
 
 import com.domain.util.HttpUtil;
+import com.github.stuxuhai.jpinyin.PinyinHelper;
 import org.apache.log4j.Logger;
 
 import javax.sql.DataSource;
@@ -65,17 +66,24 @@ public class TableOperator {
         return sql.toString().substring(0, sql.length()-1);
     }
 
-    private String createDomainMapperSql(String domain) {
+    public String createDomainMapperSql(String domain) {
         String[] array = domain.split(",");
-
         StringBuilder sql = new StringBuilder("INSERT INTO domain_mapper (domain_name, domain_message, CREATE_time) VALUES ");
-        for (int i = 0; i < array.length; i++) {
-            List list = getMapper(array[i]);
-            if (list != null && list.size() > 0){
-                for (int j = 0; j < list.size(); j++) {
-                    sql.append("('" + array[i] + "','" + list.get(j) + "', SYSDATE()),");
+        try {
+            for (int i = 0; i < array.length; i++) {
+                List<String> list = getMapper(array[i]);
+                if (list != null && list.size() > 0){
+                    for (int j = 0; j < list.size(); j++) {
+                        String result = PinyinHelper.getShortPinyin(list.get(j));
+                        if (array[i].equals(result)){
+                            sql.append("('" + array[i] + "','" + list.get(j) + "', SYSDATE()),");
+                        }
+                    }
                 }
             }
+        }
+        catch (Throwable e){
+            logger.error(e.getMessage(), e);
         }
         return sql.toString().substring(0, sql.length()-1);
 
