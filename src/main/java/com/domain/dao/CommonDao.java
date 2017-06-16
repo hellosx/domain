@@ -10,6 +10,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 public class CommonDao extends SqlSessionDaoSupport {
 
     public int insert(final String sqlMapId, final Object object) {
+
         try {
             SqlSession session = getSqlSession();
             return session.insert(sqlMapId, object);
