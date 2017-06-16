@@ -1,39 +1,40 @@
 package com.domain.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Created by sunxin(hysx8@sina.com) on 2017/6/6.
  */
 public class Domain implements Serializable{
 
-    private int avail;
+    private String domainName;
 
-    private String name;
+    private String domainLength;
 
-    private String tld;
+    private Date createTime;
 
-    public int getAvail() {
-        return avail;
+    public String getDomainName() {
+        return domainName;
     }
 
-    public void setAvail(int avail) {
-        this.avail = avail;
+    public void setDomainName(String domainName) {
+        this.domainName = domainName;
     }
 
-    public String getName() {
-        return name;
+    public String getDomainLength() {
+        return domainLength;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setDomainLength(String domainLength) {
+        this.domainLength = domainLength;
     }
 
-    public String getTld() {
-        return tld;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setTld(String tld) {
-        this.tld = tld;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

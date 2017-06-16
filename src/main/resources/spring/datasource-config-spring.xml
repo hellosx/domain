@@ -46,4 +46,13 @@
         </property>
     </bean>
 
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="configLocation" value="classpath:sql_map_config.xml" />
+    </bean>
+
+    <bean id="commonDao" class="com.domain.dao.CommonDao">
+        <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+    </bean>
+
 </beans>

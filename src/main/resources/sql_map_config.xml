@@ -8,9 +8,7 @@
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.bozhong.privilege.domain.dbdo.PrivilegeDO" alias="privilegeDO"/>
-
-
+        <typeAlias type="com.domain.entity.Domain" alias="privilegeDO"/>
     </typeAliases>
     <plugins>
         <plugin interceptor="com.zhicall.core.mybatis.plugin.SelectCountSqlInterceptor" />
@@ -19,8 +17,6 @@
         </plugin>
     </plugins>
     <mappers>
-        <mapper resource="config/ibatis/privilege-sqlmap.xml"/>
-
-
+        <mapper resource="ibatis/domain-sqlmap.xml"/>
     </mappers>
 </configuration>
