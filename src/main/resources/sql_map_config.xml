@@ -10,12 +10,6 @@
     <typeAliases>
         <typeAlias type="com.domain.entity.Domain" alias="privilegeDO"/>
     </typeAliases>
-    <plugins>
-        <plugin interceptor="com.zhicall.core.mybatis.plugin.SelectCountSqlInterceptor" />
-        <plugin interceptor="com.zhicall.core.mybatis.plugin.OffsetLimitInterceptor">
-            <property name="dialectClass" value="com.zhicall.core.mybatis.dialect.MySQLDialect" />
-        </plugin>
-    </plugins>
     <mappers>
         <mapper resource="ibatis/domain-sqlmap.xml"/>
     </mappers>
